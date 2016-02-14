@@ -1,0 +1,19 @@
+{
+  "name": "ctfdisplay",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A starter project for AngularJS",
+  "repository": "https://github.com/garnetlabs/ctfdisplay",
+  "license": "MIT",
+  "dependencies": {
+    "bower": "^1.7.7",
+    "express": "^4.13.4",
+    "express-generator": "^4.13.1",
+    "generator-angular": "^0.15.1",
+    "generator-karma": "^1.0.1",
+    "grunt": "^0.4.5",
+    "gulp": "^3.9.1",
+    "nodemon": "^1.8.1",
+    "yo": "^1.6.0"
+  }
+}
