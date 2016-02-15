@@ -29,7 +29,7 @@ clientApp.config( function($stateProvider) {
             templateUrl: 'views/carousel.html',
             controller: 'CarouselCtrl'
             //controllerAs: 'carousel'
-            //template: "index.viewA" 
+            //template: "index.viewA"
           },
           'schedule': {
             templateUrl: 'views/schedule.html',
@@ -49,7 +49,7 @@ clientApp.config( function($stateProvider) {
             //templateUrl: 'views/main.html',
             //controller: 'MainCtrl',
             //controllerAs: 'main'
-            template: "about.viewA" 
+            template: "about.viewA"
           },
           'schedule': {template: "about.viewB"},
           'ticker': {},
@@ -62,7 +62,7 @@ clientApp.config( function($stateProvider) {
             //templateUrl: 'views/main.html',
             //controller: 'MainCtrl',
             //controllerAs: 'main'
-            template: "contact.viewA" 
+            template: "contact.viewA"
           },
           'schedule': {template: "contact.viewB"},
           'ticker': {},
@@ -86,4 +86,3 @@ clientApp.config( function($stateProvider) {
         redirectTo: '/'
       });
   }*/
-  
