@@ -8,16 +8,16 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('CarouselCtrl', ['$scope' function () {
+  .controller('CarouselCtrl', function ($scope, $http) {
+
     $scope.myInterval = 5000;
   	$scope.noWrapSlides = false;
-  	var slides = $scope.slides = [];
+    var slides = $scope.slides = [];
   	var currIndex = 0;
-
   	$scope.addSlide = function() {
     	var newWidth = 600 + slides.length + 1;
-    	slides.push({
-      		image: 'http://lorempixel.com/' + newWidth + '/300',
+      slides.push({
+      		image: 'http://lorempixel.com/' + newWidth + '/600',
       		text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
       		id: currIndex++
     	});
@@ -27,7 +27,6 @@ angular.module('clientApp')
     	var indexes = generateIndexesArray();
     	assignNewIndexesToSlides(indexes);
   	};
-
   	for (var i = 0; i < 4; i++) {
     	$scope.addSlide();
   	}
@@ -63,4 +62,4 @@ angular.module('clientApp')
 
     	return array;
   	}
- }]);
+ });
