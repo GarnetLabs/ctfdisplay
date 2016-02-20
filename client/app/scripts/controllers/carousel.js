@@ -2,62 +2,34 @@
 
 /**
  * @ngdoc function
- * @name clientApp.controller:MainCtrl
+ * @name clientApp.controller:CarouselCtrl
  * @description
- * # MainCtrl
+ * # CarouselCtrl
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('CarouselCtrl', function ($scope) {
+  .controller('CarouselCtrl', function ($scope, CarouselService, $interval) {
 
-    $scope.myInterval = 5000;
+    $scope.slideInterval = 5000;
   	$scope.noWrapSlides = false;
-    var slides = $scope.slides = [];
-  	var currIndex = 0;
-  	$scope.addSlide = function() {
-    	var newWidth = 600 + slides.length + 1;
-      slides.push({
-      		image: 'http://lorempixel.com/' + newWidth + '/600',
-      		text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
-      		id: currIndex++
-    	});
-  	};
+    $scope.errorMsg = null;
+    $scope.slides = [];
+    var refreshInterval = 100000;
 
-    function assignNewIndexesToSlides(indexes) {
-      for (var i = 0, l = slides.length; i < l; i++) {
-        slides[i].id = indexes.pop();
+    var handleSuccess = function (data) {
+      if (data) {
+        $scope.slides = data;
+        console.log('CarouselCtrl: images fetched: ' + new Date());
       }
-    }
+    };
+    var handleError = function (error) {
+      $scope.errorMsg = error.status + ' (' + error.statusText + ')';
+      console.log($scope.errorMsg);
+    };
+    $scope.getImages = function () {
+      CarouselService.images().then(handleSuccess, handleError);
+    };
 
-    // http://stackoverflow.com/questions/962802#962890
-    function shuffle(array) {
-      var tmp, current, top = array.length;
-
-      if (top) {
-        while (--top) {
-          current = Math.floor(Math.random() * (top + 1));
-          tmp = array[current];
-          array[current] = array[top];
-          array[top] = tmp;
-        }
-      }
-
-      return array;
-    }
-
-    function generateIndexesArray() {
-      var indexes = [];
-      for (var i = 0; i < currIndex; ++i) {
-        indexes[i] = i;
-      }
-      return shuffle(indexes);
-    }
-
-  	$scope.randomize = function() {
-    	var indexes = generateIndexesArray();
-    	assignNewIndexesToSlides(indexes);
-  	};
-  	for (var i = 0; i < 4; i++) {
-    	$scope.addSlide();
-  	}
+    $scope.getImages();
+    $interval($scope.getImages, refreshInterval);
  });

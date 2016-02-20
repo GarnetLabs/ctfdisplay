@@ -10,7 +10,6 @@ var cheerio = require('cheerio');
 router.get('/', function(req, res, next) {
   var baseUrl = 'http://www.aradhana.org';
   var schedulePath = '/schedule.html';
-  var scheduleFile = 'schedule.json';
   var scheduleDays = [];
   var currentDay = 0;
   var currentVenue = 0;

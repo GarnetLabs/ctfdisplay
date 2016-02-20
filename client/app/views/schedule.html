@@ -1,5 +1,7 @@
-<p>{{schedule[0].day}}</p>
+  <p>{{schedule[0].day}}</p>
 <p>{{schedule[0].venues[0].venue}}</p>
-<p>{{schedule[0].venues[0].events[0].time}}</p>
-<p>{{schedule[0].venues[0].events[0].event}}</p>
+<div ng-repeat="event in schedule[0].venues[0].events">
+  <p>{{event.time}}</p>
+  <p>{{event.event}}</p>
+</div>
 <p>** refreshes automatically every 10 seconds **</p>

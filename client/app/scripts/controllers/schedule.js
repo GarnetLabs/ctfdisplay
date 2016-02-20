@@ -2,29 +2,31 @@
 
 /**
  * @ngdoc function
- * @name clientApp.controller:MainCtrl
+ * @name clientApp.controller:ScheduleCtrl
  * @description
- * # MainCtrl
+ * # ScheduleCtrl
  * Controller of the clientApp
  */
 angular.module('clientApp')
   .controller('ScheduleCtrl', function ($scope, ScheduleService, $interval) {
-    $scope.schedule = null;
+    $scope.schedule = [];
     $scope.errorMsg = null;
-    var refreshInterval = 10000;
+    var refreshInterval = 60000;
 
     var handleSuccess = function (data) {
       if (data) {
         $scope.schedule = data;
-        console.log('ScheduleCtrl: schedule updated');
+        console.log('ScheduleCtrl: schedule fetched: ' + new Date());
       }
     };
     var handleError = function (error) {
       $scope.errorMsg = error.status + ' (' + error.statusText + ')';
+      console.log($scope.errorMsg);
     };
-    var getSchedule = function () {
+    $scope.getSchedule = function () {
       ScheduleService.scrape().then(handleSuccess, handleError);
     };
 
-    $interval(getSchedule, refreshInterval);
+    $scope.getSchedule();
+    $interval($scope.getSchedule, refreshInterval);
   });
