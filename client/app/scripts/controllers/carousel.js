@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('CarouselCtrl', function ($scope, $http) {
+  .controller('CarouselCtrl', function ($scope) {
 
     $scope.myInterval = 5000;
   	$scope.noWrapSlides = false;

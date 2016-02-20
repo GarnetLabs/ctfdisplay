@@ -13,14 +13,13 @@ var clientApp = angular
     'ngAnimate',
     'ngCookies',
     'ngResource',
-   // 'ngRoute',
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
     'ui.router'
   ]);
-clientApp.config( function($stateProvider) {
-    //$urlRouterProvider.otherwise("/");
+clientApp.config( function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/");
     $stateProvider
       .state('index', {
         url: "/",
@@ -39,7 +38,8 @@ clientApp.config( function($stateProvider) {
           'ticker': {
             templateUrl: 'views/ticker.html',
             controller: 'TickerCtrl',
-            controllerAs: 'ticker'},
+            controllerAs: 'ticker'
+          }
         }
       })
       .state('about', {
@@ -70,19 +70,3 @@ clientApp.config( function($stateProvider) {
       });
   }
 );
-/*.config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  }*/
