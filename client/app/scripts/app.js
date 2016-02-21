@@ -26,9 +26,8 @@ clientApp.config( function($stateProvider, $urlRouterProvider) {
         views: {
           'carousel': {
             templateUrl: 'views/carousel.html',
-            controller: 'CarouselCtrl'
-            //controllerAs: 'carousel'
-            //template: "index.viewA"
+            controller: 'CarouselCtrl',
+            controllerAs: 'carousel'
           },
           'schedule': {
             templateUrl: 'views/schedule.html',
@@ -67,6 +66,13 @@ clientApp.config( function($stateProvider, $urlRouterProvider) {
           'schedule': {template: "contact.viewB"},
           'ticker': {},
         }
+      });
+    $stateProvider
+      .state('announcement', {
+        url: "/announcements",
+        templateUrl: 'views/announcement.html',
+        controller: 'AnnouncementCtrl',
+        'controllerAs': 'announce'
       });
   }
 );

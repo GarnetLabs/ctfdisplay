@@ -27,7 +27,7 @@
   <![endif]-->
 
   <div class="header">
-    <div class="navbar navbar-default" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
 
@@ -38,7 +38,9 @@
             <span class="icon-bar"></span>
           </button>
 
-          <a class="navbar-brand" href="#/">client</a>
+          <a class="navbar-brand" href="#/">
+            <img src="/images/logo.png" style="max-width: 105px; margin-top: -16px;">
+          </a>
         </div>
 
         <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -53,21 +55,19 @@
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="row" style="height: 800px;">
-      <div class="col-md-9" ui-view="carousel"></div>
-      <div class="col-md-3" ui-view="schedule"></div>
+  <div class="container-fluid body-content">
+    <div class="row" ui-view>
+      <div class="col-md-8" ui-view="carousel"></div>
+      <div class="col-md-4" ui-view="schedule"></div>
     </div>
-    <div class="row">
+    <!--<div class="row">
       <div class="col-md-12" ui-view="ticker"></div>
-    </div>
+    </div>-->
   </div>
 
-  <!--div class="footer">
-    <div class="container">
-      <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-    </div>
-  </div-->
+  <div class="footer navbar-fixed-bottom footer-fixed">
+    <div ui-view="ticker" style="text-align: center"></div>
+  </div>
 
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

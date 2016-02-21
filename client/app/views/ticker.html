@@ -1,1 +1,5 @@
-<p>This is the ticker view.</p>
+<div class="ticker">
+  <div ng-repeat="tickerItem in tickerItems" class="ticker-slide" ng-show="isCurrentIndex($index)">
+    <p>{{tickerItem.announcementText}}</p>
+  </div>
+</div>

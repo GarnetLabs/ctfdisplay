@@ -67,9 +67,9 @@ body {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  .container {
+  /*.container {
     max-width: 730px;
-  }
+  }*/
 
   /* Remove the padding we set earlier */
   .header,
@@ -86,4 +86,33 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.header {
+  margin-bottom: 0px;
+}
+
+.footer-fixed {
+  height: 50px;
+}
+
+.body-content {
+  position: absolute;
+  overflow-y: auto;
+  top: 70px;
+  bottom: 50px;
+}
+
+.ticker {
+  height: 25px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.ticker-slide {
+  -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  -o-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  overflow: hidden;
 }
