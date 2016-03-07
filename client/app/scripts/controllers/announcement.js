@@ -12,22 +12,51 @@
  */
 angular.module('clientApp')
   .controller('AnnouncementCtrl', function ($scope, AnnouncementService) {
-    $scope.passcode = null;
-    $scope.announcementText = null;
-    $scope.showPasscode = false;
+    /*global toastr */
+    $scope.announcements = [];
+    $scope.passcode = undefined;
+    var newRow = {announcementText: undefined};
 
-    var handleSuccess = function (data) {
-      if (data) {
-        $scope.slides = data;
-        console.log('CarouselCtrl: images fetched: ' + new Date());
-      }
-    };
-    var handleError = function (error) {
-      $scope.errorMsg = error.status + ' (' + error.statusText + ')';
-      console.log($scope.errorMsg);
-    };
     $scope.submit = function () {
-      AnnouncementService.sendAnnouncement({passcode: $scope.passcode, announcementText: $scope.announcementText})
+      var handleSuccess = function (data) {
+        if (data) {
+          console.log('AnnouncementCtrl: annoncements posted: ', data);
+          toastr.options.closeButton = true;
+          toastr.options.positionClass = 'toast-top-center';
+          toastr.success('Announcements submitted successfully');
+        }
+      };
+      var handleError = function (error) {
+        $scope.errorMsg = error.status + ' (' + error.statusText + ')';
+        console.log($scope.errorMsg);
+      };
+      console.log('AnnouncementCtrl submit');
+      AnnouncementService.sendAnnouncements({data: $scope.announcements, passcode: $scope.passcode})
         .then(handleSuccess, handleError);
     };
+
+    $scope.getAnnouncements = function () {
+      var handleSuccess = function (data) {
+        if (data) {
+          $scope.announcements = data;
+          console.log('AnnouncementCtrl: announcements fetched: ', data);
+        }
+      };
+      var handleError = function (error) {
+        $scope.errorMsg = error.status + ' (' + error.statusText + ')';
+        console.log($scope.errorMsg);
+      };
+      console.log('AnnouncementCtrl getAnnouncements');
+      AnnouncementService.getAnnouncements().then(handleSuccess, handleError);
+    };
+
+    $scope.addRow = function () {
+      $scope.announcements.push(angular.copy(newRow));
+    };
+
+    $scope.removeRow = function (index) {
+      $scope.announcements.splice(index, 1);
+    };
+
+    $scope.getAnnouncements();
   });

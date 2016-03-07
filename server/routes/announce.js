@@ -10,18 +10,38 @@ var uuid = require('node-uuid');
 
 /* GET instagram images */
 router.post('/', function(req, res) {
+  var data = req.body.data;
   var passcode = req.body.passcode;
-  var announcementText = req.body.announcementText;
-  if (passcode === secret) {
-    var announcement = {id: uuid.v1(), timestamp: new Date().toISOString(), announcementText: announcementText};
-    var callback = function(err, count) {
+  if (passcode === secret && data) {
+    var removeCallback = function(err, count) {
       if (!err) {
-        console.log('inserted: ', announcement);
-        res.send(announcement);
+        console.log('flushed all records');
+        var insertCallback = function(err, count) {
+          if (!err) {
+            console.log('inserted: ', announcements);
+            res.send(announcements);
+          }
+        };
+        nosql.insert(announcements, insertCallback);
       }
     };
-    nosql.insert(announcement, callback);
-    console.log(announcement);
+    var filter = function(doc) {
+      // all records
+      console.log('remove: ', doc.id);
+      return true;
+    };
+
+    var announcements = [];
+    for (var i = 0; i < data.length; i++) {
+      var announcement = {
+        id: data[i].id ? data[i].id : uuid.v1(),
+        timestamp: new Date().toISOString(),
+        announcementText: data[i].announcementText
+      };
+      announcements.push(announcement);
+    }
+
+    nosql.remove(filter, removeCallback);
   }
 });
 

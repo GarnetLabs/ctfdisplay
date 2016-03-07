@@ -1,11 +1,26 @@
 <form name="announcementform" ng-submit="submit(announcementform.$valid)">
   <div class="container">
-    <div class="row">
-      <div class="col-md-4 form-group">
+    <div>
+      <button value="add" class="btn btn-success" ng-click="addRow()">
+        <i class="glyphicon glyphicon-plus" title="Add Announcement"></i> Add Announcement
+      </button>
+    </div>
+    <div class="row" ng-repeat="announcement in announcements">
+      <div class="col-md-6 form-group">
         <label class="control-label">Announcement Text</label>
-        <textarea id="announcementText" name="announcementText" class="form-control" rows="3" ng-model="announcementText" required></textarea>
+        <textarea id="announcementText_{{$index}}" name="announcementText_{{$index}}"
+                  class="form-control" rows="3"
+                  ng-model="announcement.announcementText" required>
+        </textarea>
       </div>
-      <div class="col-md-4 form-group">
+      <div class="col-md-6 form-group">
+        <button value="delete" class="btn btn-xs btn-danger" ng-click="removeRow($index)">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
+      </div>
+    </div>
+    <div class="row" ng-show="announcements.length > 0">
+      <div class="col-md-4">
         <label class="control-label">Passcode</label>
         <input id="passcode" name="passcode" class="form-control" required
                ng-model="passcode" type="{{showPasscode ? 'text' : 'password'}}" />
@@ -15,7 +30,9 @@
           Show passcode
         </span>
       </div>
-      <div class="col-md-4">
+    </div>
+    <div class="row" ng-show="announcements.length > 0">
+      <div class="col-md-12" style="padding-top: 10px;">
         <button type="submit" value="Submit" class="btn btn-primary" ng-disabled="announcementform.$invalid">Submit</button>
       </div>
     </div>

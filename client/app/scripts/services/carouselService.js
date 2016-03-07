@@ -10,7 +10,6 @@ angular.module('clientApp')
     this.images = function () {
       var handleSuccess = function (result) {
         if (result && result.data) {
-          console.log('CarouselService: success: ', result.data);
           return result.data;
         }
       };

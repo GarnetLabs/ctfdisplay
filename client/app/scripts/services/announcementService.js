@@ -7,9 +7,12 @@ angular.module('clientApp')
   .service('AnnouncementService', function ($http, $q) {
     var announcementApiUrl = '/announce';
 
-    this.sendAnnouncement = function (data) {
+    this.sendAnnouncements = function (data) {
       var handleSuccess = function (result) {
-        console.log('AnnouncementService: posted', result);
+        if (result && result.data) {
+          console.log('AnnouncementService: posted', result.data);
+          return result.data;
+        }
       };
       var handleError = function (result) {
         return $q.reject(result);
