@@ -8,10 +8,10 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('ScheduleCtrl', function ($scope, ScheduleService, $interval) {
+  .controller('ScheduleCtrl', function ($scope, ScheduleService, $interval, intervals) {
     $scope.schedule = [];
     $scope.errorMsg = null;
-    var refreshInterval = 60000;
+    var refreshInterval = intervals.SCHEDULE_REFRESH_INTERVAL;
 
     var handleSuccess = function (data) {
       if (data) {

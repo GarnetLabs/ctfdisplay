@@ -7,7 +7,7 @@
     </div>
     <div class="row" ng-repeat="announcement in announcements">
       <div class="col-md-6 form-group">
-        <label class="control-label">Announcement Text</label>
+        <label class="control-label">Announcement {{$index + 1}}</label>
         <textarea id="announcementText_{{$index}}" name="announcementText_{{$index}}"
                   class="form-control" rows="3"
                   ng-model="announcement.announcementText" required>

@@ -8,14 +8,13 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('CarouselCtrl', function ($scope, CarouselService, $interval) {
+  .controller('CarouselCtrl', function ($scope, CarouselService, $interval, intervals) {
 
-    $scope.slideInterval = 5000;
+    $scope.slideInterval = intervals.CAROUSEL_SLIDE_INTERVAL;
   	$scope.noWrapSlides = false;
     $scope.errorMsg = undefined;
     $scope.slides = [];
-    // update images every 2 hours
-    var refreshInterval = 7200000;
+    var refreshInterval = intervals.CAROUSEL_REFRESH_INTERVAL;
     var images;
 
     var equals = function (obj1, obj2) {

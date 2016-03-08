@@ -8,10 +8,10 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('TickerCtrl', function ($scope, $interval, AnnouncementService) {
+  .controller('TickerCtrl', function ($scope, $interval, AnnouncementService, intervals) {
     $scope.currentIndex = 0;
-    var cycleInterval = 5000;
-    var refreshInterval = 30000;
+    var cycleInterval = intervals.TICKER_CYCLE_INTERVAL;
+    var refreshInterval = intervals.TICKER_REFRESH_INTERVAL;
     $scope.tickerItems = [];
     $scope.isCurrentIndex = function (index) {
       return $scope.currentIndex === index;
