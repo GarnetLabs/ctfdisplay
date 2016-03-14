@@ -39,7 +39,7 @@ angular.module('clientApp')
   });
 
 angular.module('clientApp')
-  .animation('.ticker-slide', ['$animateCss', function($animateCss) {
+  .animation('.slide-container', ['$animateCss', function($animateCss) {
     return {
       addClass: function(element, className, doneFn) {
         if (className === 'ng-hide') {

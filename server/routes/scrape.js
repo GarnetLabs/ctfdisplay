@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
   var currentVenue = 0;
   request(baseUrl + schedulePath, function (error, response, html) {
     if (!error) {
-      var $ = cheerio.load(html);
+      var $ = cheerio.load(html, {normalizeWhitespace: true});
       $('#schedule tbody tr').each(function (i, el) {
         var thDate = $(this).find($('th[class="date"]'));
         var thVenue = $(this).find($('th[class="venue"]'));
@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
         if (thDate && thDate.length > 0) {
           var parts = thDate.text().trim().split(/\s+/);
           if (parts.length > 0) {
-            var date = parts.slice(0, 4).join(' ');
+            var date = new Date(parts.slice(0, 4).join(' ')).toDateString();
             if (parts.length > 4) {
               var venue = parts.slice(4, parts.length).join(' ');
               scheduleDays.push(
@@ -62,8 +62,10 @@ router.get('/', function(req, res, next) {
           currentVenue = scheduleDays[currentDay].venues.length - 1;
           scheduleDays[currentDay].venues[currentVenue].events.push(
             {
-              time: tdTime.text().trim(),
-              event: tdEvent.text().trim()
+              time: tdTime.text().trim().replace('–', 'to'),
+              event: tdEvent.contents().not(function () {
+                return this.tagName === 'table';
+              }).text().trim()
             }
           );
         }
