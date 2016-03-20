@@ -10,6 +10,7 @@
 
 body {
   padding: 0;
+  background-color: #F15D2D;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -36,9 +37,8 @@ body {
 
 /* Custom page footer */
 .footer {
-  padding-top: 19px;
   color: #777;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #777;
 }
 
 .container-narrow > hr {
@@ -93,28 +93,56 @@ body {
 }
 
 .footer-fixed {
-  padding-top: 15px;
-  height: 50px;
+  height: 100px;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  background-color: #f8f8f8;
+}
+
+.ticker-container {
+  text-align: center;
+  align-self: center;
 }
 
 .body-content {
   position: absolute;
   overflow-y: auto;
   top: 70px;
-  bottom: 50px;
+  bottom: 120px;
+  width: 100%;
 }
 
 .ticker {
-  height: 25px;
+  height: 40px;
   font-weight: bold;
-  font-size: large;
+  font-size: 200%;
+  color: #000000;
   overflow: hidden;
 }
 
 .slide-container {
-  -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-  -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-  -o-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+  -moz-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+  -o-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
   overflow: hidden;
+}
+
+.carousel-control {
+  background-image: inherit !important;
+}
+
+.carousel-control {
+  display: none;
+}
+
+.carousel-indicators {
+  display: none;
+}
+
+.carousel img {
+  margin: auto;
+  width: auto !important;
+  height: 640px !important;
 }

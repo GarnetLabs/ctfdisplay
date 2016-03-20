@@ -13,6 +13,11 @@ angular.module('clientApp')
     var cycleInterval = intervals.TICKER_CYCLE_INTERVAL;
     var refreshInterval = intervals.TICKER_REFRESH_INTERVAL;
     $scope.tickerItems = [];
+
+    $scope.tickerPosition = 200;
+    $scope.temps = [];
+    $scope.margin = 20;
+
     $scope.isCurrentIndex = function (index) {
       return $scope.currentIndex === index;
     };
@@ -33,6 +38,7 @@ angular.module('clientApp')
       console.log('TickerCtrl updateTickerItems');
       AnnouncementService.getAnnouncements().then(handleSuccess, handleError);
     };
+
     $scope.updateTickerItems();
     $interval($scope.nextItem, cycleInterval);
     $interval($scope.updateTickerItems, refreshInterval);
@@ -44,23 +50,20 @@ angular.module('clientApp')
       addClass: function(element, className, doneFn) {
         if (className === 'ng-hide') {
           var animator = $animateCss(element, {
-            to: {height: '0px', opacity: 0}
+            from: {opacity: 1},
+            to: {opacity: 0}
           });
           if (animator) {
-            return animator.start().finally(function() {
-              element[0].style.height = '';
-              doneFn();
-            });
+            return animator.start().finally(doneFn);
           }
         }
         doneFn();
       },
       removeClass: function(element, className, doneFn) {
         if (className === 'ng-hide') {
-          var height = element[0].offsetHeight;
           var animator = $animateCss(element, {
-            from: {height: '0px', opacity: 0},
-            to: {height: height + 'px', opacity: 1}
+            from: {opacity: 0},
+            to: {opacity: 1}
           });
           if (animator) {
             return animator.start().finally(doneFn);

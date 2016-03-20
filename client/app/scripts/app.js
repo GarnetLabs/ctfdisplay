@@ -26,7 +26,7 @@ clientApp.constant('intervals', {
   'TICKER_CYCLE_INTERVAL': 5000,
   'TICKER_REFRESH_INTERVAL': 600000
 });
-clientApp.config( function($stateProvider, $urlRouterProvider) {
+clientApp.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
     $stateProvider
       .state('index', {
@@ -47,32 +47,6 @@ clientApp.config( function($stateProvider, $urlRouterProvider) {
             controller: 'TickerCtrl',
             controllerAs: 'ticker'
           }
-        }
-      })
-      .state('about', {
-        url: "/about",
-        views: {
-          'carousel': {
-            //templateUrl: 'views/main.html',
-            //controller: 'MainCtrl',
-            //controllerAs: 'main'
-            template: "about.viewA"
-          },
-          'schedule': {template: "about.viewB"},
-          'ticker': {},
-        }
-      })
-      .state('contact', {
-        url: "/contact",
-        views: {
-          'carousel': {
-            //templateUrl: 'views/main.html',
-            //controller: 'MainCtrl',
-            //controllerAs: 'main'
-            template: "contact.viewA"
-          },
-          'schedule': {template: "contact.viewB"},
-          'ticker': {},
         }
       });
     $stateProvider
