@@ -11,7 +11,7 @@
 body {
   padding: 0;
   /*background-color: #F15D2D;*/
-  background-color: #803;
+  background-color: #111;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -39,7 +39,7 @@ body {
 /* Custom page footer */
 .footer {
   color: #777;
-  border-top: solid #777;
+  border-top: 1px solid #777;
 }
 
 .container-narrow > hr {
@@ -148,6 +148,14 @@ body {
   height: 640px !important;*/
 }
 
-.thick-border {
-  border: solid #777;
+.schedule-header {
+  background-color: #803 !important;
+}
+
+.schedule-content {
+  background-color: #ffefd5 !important;
+}
+
+.md-subheader {
+  background-color: inherit !important;
 }
