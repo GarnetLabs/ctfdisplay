@@ -38,7 +38,7 @@ body {
 /* Custom page footer */
 .footer {
   color: #777;
-  border-top: 1px solid #777;
+  border-top: solid #777;
 }
 
 .container-narrow > hr {
@@ -145,4 +145,8 @@ body {
   margin: auto;
   width: auto !important;
   height: 640px !important;
+}
+
+.thick-border {
+  border: solid #777;
 }
