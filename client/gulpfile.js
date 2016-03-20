@@ -73,7 +73,7 @@ gulp.task('lint:scripts', function () {
 });
 
 gulp.task('clean:tmp', function (cb) {
-  rimraf('./.tmp', cb);
+  rimraf(conf.tmp, cb);
 });
 
 gulp.task('start:client', ['start:server'], function () {
@@ -185,8 +185,8 @@ gulp.task('inject', ['scripts', 'styles'], function () {
 // Build //
 ///////////
 
-gulp.task('clean:dist', function (cb) {
-  rimraf('./dist', cb);
+gulp.task('clean', function (cb) {
+  rimraf('{' + conf.dist + ',' + conf.tmp + '}', cb);
 });
 
 gulp.task('client:build', ['html', 'styles'], function () {
@@ -207,7 +207,7 @@ gulp.task('client:build', ['html', 'styles'], function () {
     .pipe(gulp.dest(conf.dist));
 });
 
-gulp.task('html', function () {
+gulp.task('html', ['inject'], function () {
   return gulp.src(conf.app + '/views/**/*')
     .pipe(gulp.dest(conf.dist + '/views'));
 });
@@ -232,8 +232,8 @@ gulp.task('copy:fonts', function () {
     .pipe(gulp.dest(conf.dist + '/fonts'));
 });
 
-gulp.task('build', ['clean:dist'], function () {
-  runSequence(['images', 'copy:extras', 'copy:fonts', 'client:build']);
+gulp.task('build', ['clean'], function () {
+  runSequence(['html', 'images', 'copy:extras', 'copy:fonts', 'client:build']);
 });
 
 gulp.task('default', ['build']);
