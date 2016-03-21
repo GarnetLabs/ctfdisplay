@@ -109,7 +109,7 @@ body {
 .body-content {
   position: absolute;
   overflow-y: auto;
-  top: 85px;
+  top: 95px;
   bottom: 120px;
   width: 100%;
 }
@@ -168,5 +168,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 25px;
+}
+
+.page-title {
+  font-weight: bold;
+  font-size: 24px;
 }
