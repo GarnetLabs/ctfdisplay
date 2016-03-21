@@ -10,7 +10,6 @@
 
 body {
   padding: 0;
-  /*background-color: #F15D2D;*/
   background-color: #111;
 }
 
@@ -174,4 +173,13 @@ body {
 .page-title {
   font-weight: bold;
   font-size: 24px;
+}
+
+md-list-item.md-no-proxy,
+md-list-item .md-no-style {
+  padding: 0px 6px !important;
+}
+
+.md-subheader .md-subheader-inner {
+  padding: 6px !important;
 }
