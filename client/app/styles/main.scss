@@ -109,7 +109,7 @@ body {
 .body-content {
   position: absolute;
   overflow-y: auto;
-  top: 70px;
+  top: 85px;
   bottom: 120px;
   width: 100%;
 }
@@ -168,4 +168,5 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 15px;
 }
