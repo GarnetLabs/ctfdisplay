@@ -52,9 +52,21 @@ clientApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('announcement', {
         url: "/announcements",
-        templateUrl: 'views/announcement.html',
+        views: {
+          '': {
+            templateUrl: 'views/announcement.html',
+            controller: 'AnnouncementCtrl',
+            'controllerAs': 'announce'
+          },
+          'ticker': {
+            templateUrl: 'views/ticker.html',
+            controller: 'TickerCtrl',
+            controllerAs: 'ticker'
+          }
+        }
+        /*templateUrl: 'views/announcement.html',
         controller: 'AnnouncementCtrl',
-        'controllerAs': 'announce'
+        'controllerAs': 'announce'*/
       });
   }
 );

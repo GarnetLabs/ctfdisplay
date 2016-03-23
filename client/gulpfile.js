@@ -10,6 +10,7 @@ var wiredep = require('wiredep').stream;
 var runSequence = require('run-sequence');
 var path = require('path');
 var _ = require('lodash');
+var mainBowerFiles = require('main-bower-files');
 
 var conf = {
   app: require('./bower.json').appPath || 'app',
@@ -189,20 +190,20 @@ gulp.task('clean', function (cb) {
   rimraf('{' + conf.dist + ',' + conf.tmp + '}', cb);
 });
 
-gulp.task('client:build', ['html', 'styles'], function () {
-  var jsFilter = $.filter('**/*.js');
-  var cssFilter = $.filter('**/*.css');
+gulp.task('client:build', ['html', 'scripts', 'styles'], function () {
+  var jsFilter = $.filter('**/*.js', {restore: true});
+  var cssFilter = $.filter('**/*.css', {restore: true});
 
-  return gulp.src(paths.views.main)
-    .pipe($.useref({searchPath: [conf.app, '.tmp']}))
+  return gulp.src(path.join(conf.tmp, '/*.html'))
+    .pipe($.useref({searchPath: [conf.app, conf.tmp]}))
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify())
-    .pipe(jsFilter.restore())
+    .pipe(jsFilter.restore)
     .pipe(cssFilter)
-    .pipe($.minifyCss({cache: true}))
-    .pipe(cssFilter.restore())
-    .pipe($.rev())
+    .pipe($.cleanCss())
+    .pipe(cssFilter.restore)
+    .pipe($.if('!*.html', $.rev()))
     .pipe($.revReplace())
     .pipe(gulp.dest(conf.dist));
 });
@@ -227,7 +228,14 @@ gulp.task('copy:extras', function () {
     .pipe(gulp.dest(conf.dist));
 });
 
-gulp.task('copy:fonts', function () {
+gulp.task('fonts', function () {
+  return gulp.src(mainBowerFiles())
+    .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
+    .pipe($.flatten())
+    .pipe(gulp.dest(conf.dist + '/fonts'));
+});
+
+gulp.task('copy:fonts', ['fonts'], function () {
   return gulp.src(conf.app + '/fonts/**/*')
     .pipe(gulp.dest(conf.dist + '/fonts'));
 });
