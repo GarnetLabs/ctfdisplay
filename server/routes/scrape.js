@@ -13,14 +13,23 @@ router.get('/', function(req, res, next) {
   var scheduleDays = [];
   var currentDay = 0;
   var currentVenue = 0;
+  var ticketPrice = -1;
   request(baseUrl + schedulePath, function (error, response, html) {
     if (!error) {
       var $ = cheerio.load(html, {normalizeWhitespace: true});
       $('#schedule tbody tr').each(function (i, el) {
+        var isPaid = $(this).parent().hasClass('paid');
+        if (!isPaid) {
+          ticketPrice = -1;
+        }
         var thDate = $(this).find($('th[class="date"]'));
         var thVenue = $(this).find($('th[class="venue"]'));
         var tdTime = $(this).find($('td[class="time"]'));
         var tdEvent = $(this).find($('td[class="event"]'));
+        var tdTicket = $(this).find($('td[class="ticket"]'));
+        if (isPaid && tdTicket && tdTicket.length > 0) {
+          ticketPrice = tdTicket.text().trim().match(/\d+/)[0];
+        }
         if (thDate && thDate.length > 0) {
           var parts = thDate.text().trim().split(/\s+/);
           if (parts.length > 0) {
@@ -65,7 +74,8 @@ router.get('/', function(req, res, next) {
               time: tdTime.text().trim().replace('–', 'to'),
               event: tdEvent.contents().not(function () {
                 return this.tagName === 'table';
-              }).text().trim()
+              }).text().trim(),
+              price: isPaid && (ticketPrice > 0) ? ticketPrice : null
             }
           );
         }

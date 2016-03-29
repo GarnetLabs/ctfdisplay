@@ -23,7 +23,7 @@ clientApp.constant('intervals', {
   'CAROUSEL_REFRESH_INTERVAL': 7200000,
   'SCHEDULE_REFRESH_INTERVAL': 600000,
   'VENUE_CYCLE_INTERVAL': 15000,
-  'TICKER_CYCLE_INTERVAL': 5000,
+  'TICKER_CYCLE_INTERVAL': 10000,
   'TICKER_REFRESH_INTERVAL': 600000
 });
 clientApp.config(function($stateProvider, $urlRouterProvider) {
